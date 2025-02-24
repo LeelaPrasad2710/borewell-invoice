@@ -144,3 +144,52 @@ button:hover {
     margin: 0;
   }
 }
+
+/* Make invoice content responsive */
+.invoice-container {
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Make the table scrollable on small screens */
+.invoice-table {
+  width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+/* Adjust input fields for mobile */
+.invoice-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Buttons should be stacked on small screens */
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Adjust footer (Bank details & Signature) for mobile */
+.invoice-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* On larger screens, keep Bank details left & Signature right */
+@media (min-width: 768px) {
+  .invoice-footer {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+  }
+}
