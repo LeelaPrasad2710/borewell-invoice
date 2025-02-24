@@ -145,3 +145,26 @@ button:hover {
   }
 }
 
+/* Container for Bank Details & Invoice Summary */
+.invoice-summary-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 20px;
+  align-items: start;
+  margin-top: 20px;
+}
+
+/* Style for Bank Details */
+.bank-details {
+  padding: 15px;
+  color: rgb(18, 17, 17);
+  font-weight: bold;
+  text-align: left;
+}
+
+/* Ensure Invoice Summary remains aligned */
+.invoice-summary {
+  text-align: right;
+}
+
+

@@ -265,37 +265,31 @@ const InvoiceGenerator = () => {
           ))}
         </tbody>
       </table>
-      <div className="invoice-summary">
-        <>
-            <p>Net Total: ₹{netTotal.toFixed(2)}</p>
-            <p>Add CGST 9%: ₹{cgst}</p>
-            <p>Add SGST 9%: ₹{sgst}</p>
-            <p>Gross Total: ₹{grossTotal}</p>
-            <div className="detail-row">
-            <label>GSTIN:</label>
-            <input
-                type="text"
-                list="gstin-options"
-                placeholder=""
-            />
-            <datalist id="gstin-options">
-                <option value="2025ABSOF12234" />
-            </datalist>
-        </div>
-            <p><strong>Amount in Words:</strong> {grossTotalWords}</p>
-        </>
 
-      </div>
 
-      <div className="invoice-footer">
+      <div className="invoice-summary-container">
         <div className="bank-details">
+          <p><strong>Bank Details:</strong></p>
           <p>Bank: SBI Bank</p>
           <p>Account Name: Sri Vinayaka Borewells</p>
           <p>Account Number: 31691791005</p>
           <p>IFSC: SBIN0014962</p>
-        </div>
-        <div className="signature">
           <p><strong>Authorized Signature:</strong></p>
+        </div>
+
+        <div className="invoice-summary">
+          <p>Net Total: ₹{netTotal.toFixed(2)}</p>
+          <p>Add CGST 9%: ₹{cgst}</p>
+          <p>Add SGST 9%: ₹{sgst}</p>
+          <p>Gross Total: ₹{grossTotal}</p>
+          <div className="detail-row">
+            <label>GSTIN:</label>
+            <input type="text" list="gstin-options" placeholder="" />
+            <datalist id="gstin-options">
+              <option value="2025ABSOF12234" />
+            </datalist>
+          </div>
+          <p><strong>Amount in Words:</strong> {grossTotalWords}</p>
         </div>
       </div>
         <div className="button-container">
