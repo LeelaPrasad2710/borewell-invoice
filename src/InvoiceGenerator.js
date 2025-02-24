@@ -292,6 +292,7 @@ const InvoiceGenerator = () => {
           <p><strong>Amount in Words:</strong> {grossTotalWords}</p>
         </div>
       </div>
+          
         <div className="button-container">
             <button className="calculate-gst" onClick={calculateGST}>Calculate GST</button>
             <button className="clear-table" onClick={clearTableData}>Clear Table Data</button>
