@@ -139,7 +139,8 @@ const InvoiceGenerator = () => {
             );
 
             pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-            pdf.save('invoice.pdf');
+            const fileName = to ? `${to.replace(/\s+/g, "_")}_invoice.pdf` : "invoice.pdf";
+            pdf.save(fileName);
       
             document.body.removeChild(invoiceClone);
           })
@@ -185,8 +186,7 @@ const InvoiceGenerator = () => {
   const calculateTotal = (rows) => {
     const total = rows.reduce((sum, row) => sum + (row.amount || 0), 0);
     setNetTotal(total);
-    
-    // Reset GST until button is clicked
+
     setCgst(0);
     setSgst(0);
     setGrossTotal(total);
@@ -195,13 +195,11 @@ const InvoiceGenerator = () => {
 
   const calculateGST = () => {
     if (cgst > 0 || sgst > 0) {
-      // If GST is already applied, reset to 0
       setCgst(0);
       setSgst(0);
       setGrossTotal(netTotal);
       setGrossTotalWords(numberToWords(Math.round(netTotal)));
     } else {
-      // Apply GST calculation
       const newCgst = (netTotal * 0.09).toFixed(2);
       const newSgst = (netTotal * 0.09).toFixed(2);
       const newGrossTotal = (netTotal + parseFloat(newCgst) + parseFloat(newSgst)).toFixed(2);
@@ -219,8 +217,10 @@ const InvoiceGenerator = () => {
         <h1>SRI VINAYAKA BOREWELLS</h1>
         <p>Contact:+91 9742888824</p>
         <p>#1289, 2nd Cross, 6th Main, Kariyanapalya, Uttarahalli, Subramanyapura post, 6th Stage, Bangalore 98</p>
-        <p>Invoice</p>
       </header>
+      <div className="invoice-detailsED">
+        <p>Invoice</p>
+      </div>
 
       <div className="invoice-details">
         <div className="detail-row">

@@ -5,20 +5,23 @@
     border: 1px solid #ddd;
     background: #fff;
   }
-  
+
   .invoice-header {
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
     text-align: center;
-    margin-bottom: 2px;
   }
   
   .invoice-header h1 {
     color: red;
-    font-size: 20px;
+    font-size: 30px;
   }
   
   .invoice-header p {
     font-size: 16px;
-    margin: 5px 0;
+    margin-top: -15px;
   }
   
   .invoice-header p {
@@ -29,8 +32,19 @@
   .invoice-details {
     display: flex;
     flex-direction: column;
-    gap: 9px;
+    gap: 6px;
     margin-bottom: 20px;
+  }
+
+  .invoice-detailsED {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 26px;
+    font-weight: bold;
+    color: rgb(243, 12, 12);
+    margin-top: -35px;
   }
   
   .detail-row {
@@ -77,12 +91,12 @@
 
     .bank-details {
         text-align: left;
-        width: 40%;
+        width: 50%;
     }
 
     /* Hide arrows for Chrome, Safari, Edge, and Opera */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
@@ -133,17 +147,13 @@ button:hover {
 
 /* Add these styles to your existing CSS file */
 @media print {
-  .button-container {
-    display: none !important;
-  }
-  
-  input {
-    border: none;
-    background: none;
-    padding: 0;
-    margin: 0;
+  .header-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
   }
 }
+
 
 /* Container for Bank Details & Invoice Summary */
 .invoice-summary-container {
@@ -157,8 +167,7 @@ button:hover {
 /* Style for Bank Details */
 .bank-details {
   padding: 15px;
-  color: rgb(18, 17, 17);
-  font-weight: bold;
+  color: rgb(10, 10, 10);
   text-align: left;
 }
 
