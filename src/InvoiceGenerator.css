@@ -161,7 +161,7 @@ button:hover {
   grid-template-columns: 1fr 1fr; /* Two equal columns */
   gap: 20px;
   align-items: start;
-  margin-top: 20px;
+  margin-top: 2px;
 }
 
 /* Style for Bank Details */
