@@ -5,9 +5,7 @@ import html2canvas from "html2canvas";
 
 const InvoiceGenerator = () => {
   const [rows, setRows] = useState([
-    { description: "Drilling Charges", depth: "001 To 100", quantity: "", price: "", amount: 0 },
-    { description: "Drilling Charges", depth: "101 To 200", quantity: "", price: "", amount: 0 },
-    { description: "Drilling Charges", depth: "201 To 300", quantity: "", price: "", amount: 0 },
+    { description: "Drilling Charges", depth: "01 To 300", quantity: "", price: "", amount: 0 },
     { description: "Drilling Charges", depth: "301 To 400", quantity: "", price: "", amount: 0 },
     { description: "Drilling Charges", depth: "401 To 500", quantity: "", price: "", amount: 0 },
     { description: "Drilling Charges", depth: "501 To 600", quantity: "", price: "", amount: 0 },
@@ -15,6 +13,12 @@ const InvoiceGenerator = () => {
     { description: "Drilling Charges", depth: "701 To 800", quantity: "", price: "", amount: 0 },
     { description: "Drilling Charges", depth: "801 To 900", quantity: "", price: "", amount: 0 },
     { description: "Drilling Charges", depth: "901 To 1000", quantity: "", price: "", amount: 0 },
+    { description: "Drilling Charges", depth: "1001 To 1100", quantity: "", price: "", amount: 0 },
+    { description: "Drilling Charges", depth: "1101 To 1200", quantity: "", price: "", amount: 0 },
+    { description: "Drilling Charges", depth: "1201 To 1300", quantity: "", price: "", amount: 0 },
+    { description: "Drilling Charges", depth: "1301 To 1400", quantity: "", price: "", amount: 0 },
+    { description: "Drilling Charges", depth: "1401 To 1500", quantity: "", price: "", amount: 0 },
+    { description: "Drilling Charges", depth: "1501 To 1600", quantity: "", price: "", amount: 0 },
     { description: "Casing Pipe PVC 7\"", depth: "", quantity: "", price: "", amount: 0 },
     { description: "Casing Pipe PVC 10\"", depth: "", quantity: "", price: "", amount: 0 },
     { description: "Coller", depth: "", quantity: "", price: "", amount: 0 },
