@@ -30,114 +30,114 @@ const InvoiceGenerator = () => {
     { description: "Water Injection", depth: "", quantity: "", price: "", amount: 0 },
     { description: "Filter Casing", depth: "", quantity: "", price: "", amount: 0 },
   ]);
-  
-    const [netTotal, setNetTotal] = useState(0);
-    const [cgst, setCgst] = useState(0);
-    const [sgst, setSgst] = useState(0);
-    const [grossTotal, setGrossTotal] = useState(0);
-    const [grossTotalWords, setGrossTotalWords] = useState("");
-    const [to, setTo] = useState("");
-    const [clientAddress, setClientAddress] = useState("");
-    const [placeOfSupply, setPlaceOfSupply] = useState("");
-    const [clientGst, setclientGst] = useState("");
-    const [clientContact, setclientContact] = useState("");
-    
 
-    const deleteRow = (index) => {
-      const updatedRows = rows.filter((_, rowIndex) => rowIndex !== index);
-      setRows(updatedRows);
+  const [netTotal, setNetTotal] = useState(0);
+  const [cgst, setCgst] = useState(0);
+  const [sgst, setSgst] = useState(0);
+  const [grossTotal, setGrossTotal] = useState(0);
+  const [grossTotalWords, setGrossTotalWords] = useState("");
+  const [to, setTo] = useState("");
+  const [clientAddress, setClientAddress] = useState("");
+  const [placeOfSupply, setPlaceOfSupply] = useState("");
+  const [clientGst, setclientGst] = useState("");
+  const [clientContact, setclientContact] = useState("");
+
+
+  const deleteRow = (index) => {
+    const updatedRows = rows.filter((_, rowIndex) => rowIndex !== index);
+    setRows(updatedRows);
+  };
+
+  const clearTableData = () => {
+    const updatedRows = rows.map(row => ({ ...row, quantity: "", price: "", amount: 0 }));
+    setRows(updatedRows);
+    calculateTotal(updatedRows);
+  };
+
+  const clearHeaderFields = () => {
+    setTo("");
+    setClientAddress("");
+    setPlaceOfSupply("");
+    setclientGst("");
+    setclientContact("");
+  };
+
+  const clearPriceOnly = () => {
+    const updatedRows = rows.map(row => ({ ...row, price: "", amount: 0 }));
+    setRows(updatedRows);
+    calculateTotal(updatedRows);
+  };
+
+  const exportToPDF = () => {
+    const invoice = document.getElementById("invoice-content");
+    if (!invoice) {
+      console.error("Invoice element not found");
+      return;
+    }
+
+    const invoiceClone = invoice.cloneNode(true);
+    invoiceClone.style.width = "800px";
+    invoiceClone.style.position = 'absolute';
+    invoiceClone.style.left = '-9999px';
+    document.body.appendChild(invoiceClone);
+
+    // Hide delete buttons and the entire delete column
+    const deleteColumns = invoiceClone.querySelectorAll(".delete-column");
+    deleteColumns.forEach(column => column.remove()); // Completely remove the column
+
+    const buttonContainer = invoiceClone.querySelector(".button-container");
+    if (buttonContainer) {
+      buttonContainer.style.display = 'none';
+    }
+
+    const inputs = invoiceClone.querySelectorAll("input");
+    inputs.forEach(input => {
+      const span = document.createElement('span');
+      span.textContent = input.value || "";
+      span.style.padding = "2px";
+      input.parentNode.replaceChild(span, input);
+    });
+
+    const pdfOptions = {
+      scale: 1.5,
+      quality: 0.9,
+      useCORS: true,
+      allowTaint: true,
+      logging: false,
+      height: invoiceClone.scrollHeight,
+      windowWidth: 800,
+      windowHeight: invoiceClone.scrollHeight
     };
-    
-    const clearTableData = () => {
-        const updatedRows = rows.map(row => ({ ...row, quantity: "", price: "", amount: 0 }));
-        setRows(updatedRows);
-        calculateTotal(updatedRows);
-      };
-      
-      const clearHeaderFields = () => {
-        setTo("");
-        setClientAddress("");
-        setPlaceOfSupply("");
-        setclientGst("");
-        setclientContact("");
-      };
-      
-      const clearPriceOnly = () => {
-        const updatedRows = rows.map(row => ({ ...row, price: "", amount: 0 }));
-        setRows(updatedRows);
-        calculateTotal(updatedRows);
-      };
 
-      const exportToPDF = () => {
-        const invoice = document.getElementById("invoice-content");
-        if (!invoice) {
-          console.error("Invoice element not found");
-          return;
-        }
-      
-        const invoiceClone = invoice.cloneNode(true);
-        invoiceClone.style.width = "800px";
-        invoiceClone.style.position = 'absolute';
-        invoiceClone.style.left = '-9999px';
-        document.body.appendChild(invoiceClone);
-      
-        // Hide delete buttons and the entire delete column
-        const deleteColumns = invoiceClone.querySelectorAll(".delete-column");
-        deleteColumns.forEach(column => column.remove()); // Completely remove the column
-      
-        const buttonContainer = invoiceClone.querySelector(".button-container");
-        if (buttonContainer) {
-          buttonContainer.style.display = 'none';
-        }
-      
-        const inputs = invoiceClone.querySelectorAll("input");
-        inputs.forEach(input => {
-          const span = document.createElement('span');
-          span.textContent = input.value || "";
-          span.style.padding = "2px";
-          input.parentNode.replaceChild(span, input);
+    html2canvas(invoiceClone, pdfOptions)
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/jpeg', 0.9);
+        const pdf = new jsPDF({
+          orientation: 'portrait',
+          unit: 'mm',
+          format: 'a4',
+          compress: true
         });
-      
-        const pdfOptions = {
-          scale: 1.5,
-          quality: 0.9,
-          useCORS: true,
-          allowTaint: true,
-          logging: false,
-          height: invoiceClone.scrollHeight,
-          windowWidth: 800,
-          windowHeight: invoiceClone.scrollHeight
-        };
-      
-        html2canvas(invoiceClone, pdfOptions)
-          .then((canvas) => {
-            const imgData = canvas.toDataURL('image/jpeg', 0.9);
-            const pdf = new jsPDF({
-              orientation: 'portrait',
-              unit: 'mm',
-              format: 'a4',
-              compress: true
-            });
-      
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = Math.min(
-              (canvas.height * pdfWidth) / canvas.width,
-              pdf.internal.pageSize.getHeight() * 1.5
-            );
-      
-            pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-            const fileName = to ? `${to.replace(/\s+/g, "_")}_invoice.pdf` : "invoice.pdf";
-            pdf.save(fileName);
-      
-            document.body.removeChild(invoiceClone);
-          })
-          .catch(error => {
-            console.error('Error generating PDF:', error);
-            document.body.removeChild(invoiceClone);
-          });
-      };
-      
-      
+
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = Math.min(
+          (canvas.height * pdfWidth) / canvas.width,
+          pdf.internal.pageSize.getHeight() * 1.5
+        );
+
+        pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+        const fileName = to ? `${to.replace(/\s+/g, "_")}_invoice.pdf` : "invoice.pdf";
+        pdf.save(fileName);
+
+        document.body.removeChild(invoiceClone);
+      })
+      .catch(error => {
+        console.error('Error generating PDF:', error);
+        document.body.removeChild(invoiceClone);
+      });
+  };
+
+
 
   const numberToWords = (num) => {
     const a = [
@@ -192,13 +192,13 @@ const InvoiceGenerator = () => {
       const newCgst = (netTotal * 0.09).toFixed(2);
       const newSgst = (netTotal * 0.09).toFixed(2);
       const newGrossTotal = (netTotal + parseFloat(newCgst) + parseFloat(newSgst)).toFixed(2);
-  
+
       setCgst(newCgst);
       setSgst(newSgst);
       setGrossTotal(newGrossTotal);
       setGrossTotalWords(numberToWords(Math.round(newGrossTotal)));
     }
-  };  
+  };
 
   return (
     <div className="invoice-container" id="invoice-content">
@@ -212,24 +212,24 @@ const InvoiceGenerator = () => {
       </div>
 
       <div className="invoice-details">
-  <label>Client GST:</label>
-  <input type="text" value={clientGst} onChange={(e) => setclientGst(e.target.value)} />
+        <label>Client GST:</label>
+        <input type="text" value={clientGst} onChange={(e) => setclientGst(e.target.value)} />
 
-  <label>Mobile No:</label>
-  <input type="text" value={clientContact} onChange={(e) => setclientContact(e.target.value)} />
+        <label>Mobile No:</label>
+        <input type="text" value={clientContact} onChange={(e) => setclientContact(e.target.value)} />
 
-  <label>To:</label>
-  <input type="text" value={to} onChange={(e) => setTo(e.target.value)} />
+        <label>To:</label>
+        <input type="text" value={to} onChange={(e) => setTo(e.target.value)} />
 
-  <label>Place of Supply & Work:</label>
-  <input type="text" value={placeOfSupply} onChange={(e) => setPlaceOfSupply(e.target.value)} />
+        <label>Place of Supply & Work:</label>
+        <input type="text" value={placeOfSupply} onChange={(e) => setPlaceOfSupply(e.target.value)} />
 
-  <label>Address Of Client:</label>
-  <input type="text" value={clientAddress} onChange={(e) => setClientAddress(e.target.value)} />
+        <label>Address Of Client:</label>
+        <input type="text" value={clientAddress} onChange={(e) => setClientAddress(e.target.value)} />
 
-  <label>Date:</label>
-  <input type="date" />
-</div>
+        <label>Date:</label>
+        <input type="date" />
+      </div>
 
 
       <table className="invoice-table">
@@ -285,14 +285,14 @@ const InvoiceGenerator = () => {
           <p><strong>Amount in Words:</strong> {grossTotalWords} Only</p>
         </div>
       </div>
-          
-        <div className="button-container">
-            <button className="calculate-gst" onClick={calculateGST}>Calculate GST</button>
-            <button className="clear-table" onClick={clearTableData}>Clear Table Data</button>
-            <button className="clear-header" onClick={clearHeaderFields}>Clear Header</button>
-            <button className="clear-price" onClick={clearPriceOnly}>Clear Price</button>
-            <button className="export-button" onClick={exportToPDF}>Export to PDF</button>
-        </div>
+
+      <div className="button-container">
+        <button className="calculate-gst" onClick={calculateGST}>Calculate GST</button>
+        <button className="clear-table" onClick={clearTableData}>Clear Table Data</button>
+        <button className="clear-header" onClick={clearHeaderFields}>Clear Header</button>
+        <button className="clear-price" onClick={clearPriceOnly}>Clear Price</button>
+        <button className="export-button" onClick={exportToPDF}>Export to PDF</button>
+      </div>
     </div>
   );
 };

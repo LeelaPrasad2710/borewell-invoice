@@ -88,134 +88,141 @@
   margin-top: 2px;
   padding-top: 1px;
   border-top: 2px solid #000;
-  }
+}
 
-  .bank-details {
-      text-align: left;
-      width: 70%;
-  }
+.bank-details {
+  text-align: left;
+  width: 70%;
+}
 
-  /* Hide arrows for Chrome, Safari, Edge, and Opera */
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button {
+/* Hide arrows for Chrome, Safari, Edge, and Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 .button-container {
-display: flex;
-justify-content: space-between;
-margin-top: 20px;
-gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 10px;
 }
 
 button {
-padding: 10px 15px;
-font-size: 14px;
-font-weight: bold;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-transition: 0.3s;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 /* Button Colors */
 .clear-table {
-background-color: #d9534f; /* Red */
+  background-color: #d9534f;
+  /* Red */
 }
 
 .clear-header {
-background-color: #f0ad4e; /* Orange */
+  background-color: #f0ad4e;
+  /* Orange */
 }
 
 .calculate-gst {
-background-color: #0275d8; /* Blue */
+  background-color: #0275d8;
+  /* Blue */
 }
 
 .clear-price {
-background-color: #5bc0de; /* Light Blue */
+  background-color: #5bc0de;
+  /* Light Blue */
 }
 
 .export-button {
-background-color: #30d4a5; /* Light Blue */
+  background-color: #30d4a5;
+  /* Light Blue */
 }
 
 button:hover {
-opacity: 0.8;
+  opacity: 0.8;
 }
 
 
 /* Add these styles to your existing CSS file */
 @media print {
-.delete-column {
-  display: none !important;
-}
+  .delete-column {
+    display: none !important;
+  }
 }
 
 
 
 /* Container for Bank Details & Invoice Summary */
 .invoice-summary-container {
-display: grid;
-grid-template-columns: 1fr 1fr; /* Two equal columns */
-gap: 20px;
-align-items: start;
-margin-top: -15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Two equal columns */
+  gap: 20px;
+  align-items: start;
+  margin-top: -15px;
 }
 
 /* Style for Bank Details */
 .bank-details {
-padding: 15px;
-color: rgb(10, 10, 10);
-text-align: left;
-margin-top: -10px;
+  padding: 15px;
+  color: rgb(10, 10, 10);
+  text-align: left;
+  margin-top: -10px;
 }
 
 /* Ensure Invoice Summary remains aligned */
 .invoice-summary {
-text-align: right;
+  text-align: right;
 }
 
 .delete-button {
-background-color: #d9534f; /* Red */
-color: white;
-border: none;
-padding: 2px 1px;
-cursor: pointer;
-border-radius: 3px;
+  background-color: #d9534f;
+  /* Red */
+  color: white;
+  border: none;
+  padding: 2px 1px;
+  cursor: pointer;
+  border-radius: 3px;
 }
 
 .delete-button:hover {
-background-color: #c9302c;
+  background-color: #c9302c;
 }
 
 .invoice-details {
-display: grid;
-grid-template-columns: auto auto auto auto; /* Creates 4 equal columns */
-gap: 10px; /* Adds spacing between columns */
-align-items: center; /* Aligns text and inputs properly */
-text-align: left;
-width: 100%;
-max-width: 800px; /* Ensures the form doesn't stretch too much */
-margin: auto; /* Centers the form */
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  /* Creates 4 equal columns */
+  gap: 10px;
+  /* Adds spacing between columns */
+  align-items: center;
+  /* Aligns text and inputs properly */
+  text-align: left;
+  width: 100%;
+  max-width: 800px;
+  /* Ensures the form doesn't stretch too much */
+  margin: auto;
+  /* Centers the form */
 }
 
 .invoice-details label {
-font-weight: bold;
-text-align: right;
-white-space: nowrap; 
+  font-weight: bold;
+  text-align: right;
+  white-space: nowrap;
 }
 
 .invoice-details input {
-width: 100%;
-padding: 6px;
-border: 1px solid #ddd;
-border-radius: 4px;
-font-size: 14px;
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
 }
-
-
-
-
-
