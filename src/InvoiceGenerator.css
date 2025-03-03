@@ -60,7 +60,7 @@
   
   .detail-row input {
     width: 30%;
-    padding: 3px;
+    padding: 1px;
   }
   
   .invoice-table {
@@ -72,7 +72,7 @@
   .invoice-table th,
   .invoice-table td {
     border: 1px solid #ddd;
-    padding: 6px;
+    padding: 4px;
     text-align: left;
   }
   
@@ -92,7 +92,7 @@
 
     .bank-details {
         text-align: left;
-        width: 50%;
+        width: 70%;
     }
 
     /* Hide arrows for Chrome, Safari, Edge, and Opera */
