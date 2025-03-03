@@ -21,7 +21,7 @@
   
   .invoice-header p {
     font-size: 16px;
-    margin-top: -15px;
+    margin-top: -22px;
   }
   
   .invoice-header p {
@@ -32,8 +32,8 @@
   .invoice-details {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    margin-bottom: 20px;
+    gap: 3px;
+    margin-bottom: 0.1px;
   }
 
   .invoice-detailsED {
@@ -44,7 +44,8 @@
     font-size: 26px;
     font-weight: bold;
     color: rgb(243, 12, 12);
-    margin-top: -35px;
+    margin-top: -45px;
+    margin-bottom: -20px;
   }
   
   .detail-row {
@@ -65,7 +66,7 @@
   .invoice-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 2px;
+    margin-bottom: -12px;
   }
   
   .invoice-table th,

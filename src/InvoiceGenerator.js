@@ -194,7 +194,7 @@ const InvoiceGenerator = () => {
     setCgst(0);
     setSgst(0);
     setGrossTotal(total);
-    setGrossTotalWords(numberToWords(Math.round(total)) + " Only");
+    setGrossTotalWords(numberToWords(Math.round(total)));
   };
 
   const calculateGST = () => {
@@ -293,7 +293,7 @@ const InvoiceGenerator = () => {
               <option value="2025ABSOF12234" />
             </datalist>
           </div>
-          <p><strong>Amount in Words:</strong> {grossTotalWords}</p>
+          <p><strong>Amount in Words:</strong> {grossTotalWords} Only</p>
         </div>
       </div>
           
