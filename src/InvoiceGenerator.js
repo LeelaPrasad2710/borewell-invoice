@@ -5,7 +5,10 @@ import html2canvas from "html2canvas";
 
 const InvoiceGenerator = () => {
   const [rows, setRows] = useState([
-    { description: "Drilling Charges", depth: "01 To 300", quantity: "", price: "", amount: 0 },
+    { description: "Drilling Charges", depth: "001 To 300", quantity: "", price: "", amount: 0 },
+    { description: "Drilling Charges", depth: "001 To 100", quantity: "", price: "", amount: 0 },
+    { description: "Drilling Charges", depth: "101 To 200", quantity: "", price: "", amount: 0 },
+    { description: "Drilling Charges", depth: "201 To 300", quantity: "", price: "", amount: 0 },
     { description: "Drilling Charges", depth: "301 To 400", quantity: "", price: "", amount: 0 },
     { description: "Drilling Charges", depth: "401 To 500", quantity: "", price: "", amount: 0 },
     { description: "Drilling Charges", depth: "501 To 600", quantity: "", price: "", amount: 0 },
@@ -40,6 +43,11 @@ const InvoiceGenerator = () => {
     const [clientContact, setclientContact] = useState("");
     
 
+    const deleteRow = (index) => {
+      const updatedRows = rows.filter((_, rowIndex) => rowIndex !== index);
+      setRows(updatedRows);
+    };
+    
     const clearTableData = () => {
         const updatedRows = rows.map(row => ({ ...row, quantity: "", price: "", amount: 0 }));
         setRows(updatedRows);
@@ -66,19 +74,22 @@ const InvoiceGenerator = () => {
           console.error("Invoice element not found");
           return;
         }
-
+      
         const invoiceClone = invoice.cloneNode(true);
-
         invoiceClone.style.width = "800px";
         invoiceClone.style.position = 'absolute';
         invoiceClone.style.left = '-9999px';
         document.body.appendChild(invoiceClone);
-
+      
+        // Hide delete buttons and the entire delete column
+        const deleteColumns = invoiceClone.querySelectorAll(".delete-column");
+        deleteColumns.forEach(column => column.remove()); // Completely remove the column
+      
         const buttonContainer = invoiceClone.querySelector(".button-container");
         if (buttonContainer) {
           buttonContainer.style.display = 'none';
         }
-
+      
         const inputs = invoiceClone.querySelectorAll("input");
         inputs.forEach(input => {
           const span = document.createElement('span');
@@ -86,34 +97,7 @@ const InvoiceGenerator = () => {
           span.style.padding = "2px";
           input.parentNode.replaceChild(span, input);
         });
-
-        const invoiceFooter = invoiceClone.querySelector(".invoice-footer");
-        if (invoiceFooter) {
-          invoiceFooter.style.display = "flex";
-          invoiceFooter.style.marginTop = "20px";
-          
-          const bankDetails = invoiceFooter.querySelector(".bank-details");
-          if (bankDetails) {
-            bankDetails.style.display = "block";
-            bankDetails.style.width = "50%";
-          }
-          
-          const signature = invoiceFooter.querySelector(".signature");
-          if (signature) {
-            signature.style.display = "block";
-            signature.style.textAlign = "right";
-            signature.style.width = "50%";
-          }
-        }
-
-        const invoiceSummary = invoiceClone.querySelector(".invoice-summary");
-        if (invoiceSummary) {
-          invoiceSummary.style.display = "block";
-          invoiceSummary.style.textAlign = "right";
-          invoiceSummary.style.marginTop = "10px";
-          invoiceSummary.style.marginBottom = "20px";
-        }
-
+      
         const pdfOptions = {
           scale: 1.5,
           quality: 0.9,
@@ -124,24 +108,23 @@ const InvoiceGenerator = () => {
           windowWidth: 800,
           windowHeight: invoiceClone.scrollHeight
         };
-
+      
         html2canvas(invoiceClone, pdfOptions)
           .then((canvas) => {
             const imgData = canvas.toDataURL('image/jpeg', 0.9);
-
             const pdf = new jsPDF({
               orientation: 'portrait',
               unit: 'mm',
               format: 'a4',
               compress: true
             });
-
+      
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = Math.min(
               (canvas.height * pdfWidth) / canvas.width,
               pdf.internal.pageSize.getHeight() * 1.5
             );
-
+      
             pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
             const fileName = to ? `${to.replace(/\s+/g, "_")}_invoice.pdf` : "invoice.pdf";
             pdf.save(fileName);
@@ -153,6 +136,8 @@ const InvoiceGenerator = () => {
             document.body.removeChild(invoiceClone);
           });
       };
+      
+      
 
   const numberToWords = (num) => {
     const a = [
@@ -227,25 +212,25 @@ const InvoiceGenerator = () => {
       </div>
 
       <div className="invoice-details">
-        <div className="detail-row">
-            <label>Client GST:</label>
-              <input type="text" value={clientGst} onChange={(e) => setclientGst(e.target.value)} />
-          <label>Mobile No:</label>
-          <input type="text" value={clientContact} onChange={(e) => setclientContact(e.target.value)} />
-        </div>
-        <div className="detail-row">
-          <label>To:</label>
-          <input type="text" value={to} onChange={(e) => setTo(e.target.value)} />
-          <label>Place of Supply & Work:</label>
-          <input type="text" value={placeOfSupply} onChange={(e) => setPlaceOfSupply(e.target.value)} />
-        </div>
-        <div className="detail-row">
-          <label>Address Of Client:</label>
-          <input type="text" value={clientAddress} onChange={(e) => setClientAddress(e.target.value)}/>
-          <label>Date:</label>
-          <input type="date" />
-        </div>
-      </div>
+  <label>Client GST:</label>
+  <input type="text" value={clientGst} onChange={(e) => setclientGst(e.target.value)} />
+
+  <label>Mobile No:</label>
+  <input type="text" value={clientContact} onChange={(e) => setclientContact(e.target.value)} />
+
+  <label>To:</label>
+  <input type="text" value={to} onChange={(e) => setTo(e.target.value)} />
+
+  <label>Place of Supply & Work:</label>
+  <input type="text" value={placeOfSupply} onChange={(e) => setPlaceOfSupply(e.target.value)} />
+
+  <label>Address Of Client:</label>
+  <input type="text" value={clientAddress} onChange={(e) => setClientAddress(e.target.value)} />
+
+  <label>Date:</label>
+  <input type="date" />
+</div>
+
 
       <table className="invoice-table">
         <thead>
@@ -255,6 +240,7 @@ const InvoiceGenerator = () => {
             <th>Quantity</th>
             <th>Rate</th>
             <th>Amount</th>
+            <th className="delete-column">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -265,6 +251,9 @@ const InvoiceGenerator = () => {
               <td><input type="number" name="quantity" value={row.quantity} onChange={(e) => handleInputChange(index, e)} /></td>
               <td><input type="number" name="price" value={row.price} onChange={(e) => handleInputChange(index, e)} /></td>
               <td>{row.amount.toFixed(2)}</td>
+              <td className="delete-column">
+                <button className="delete-button" onClick={() => deleteRow(index)}>Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>
