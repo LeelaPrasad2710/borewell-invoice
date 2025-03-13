@@ -268,7 +268,7 @@ const InvoiceGenerator = () => {
           <p>Bank: UNION Bank</p>
           <p>Account Name: NarayanaSwamy V</p>
           <p>Account Number: 117010100019005</p>
-          <p>IFSC: SBIN0014962</p>
+          <p>IFSC: UBIN0811700</p>
           <p><strong>Authorized Signature:</strong></p>
         </div>
 
