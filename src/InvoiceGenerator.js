@@ -22,6 +22,8 @@ const InvoiceGenerator = () => {
     { description: "Drilling Charges", depth: "1301 To 1400", quantity: "", price: "", amount: 0 },
     { description: "Drilling Charges", depth: "1401 To 1500", quantity: "", price: "", amount: 0 },
     { description: "Drilling Charges", depth: "1501 To 1600", quantity: "", price: "", amount: 0 },
+    { description: "Drilling Charges", depth: "1601 To 1700", quantity: "", price: "", amount: 0 },
+    { description: "Drilling Charges", depth: "1701 To 1800", quantity: "", price: "", amount: 0 },
     { description: "Casing Pipe PVC 7\"", depth: "", quantity: "", price: "", amount: 0 },
     { description: "Casing Pipe PVC 10\"", depth: "", quantity: "", price: "", amount: 0 },
     { description: "Coller", depth: "", quantity: "", price: "", amount: 0 },
@@ -263,9 +265,9 @@ const InvoiceGenerator = () => {
       <div className="invoice-summary-container">
         <div className="bank-details">
           <p><strong>Bank Details:</strong></p>
-          <p>Bank: SBI Bank</p>
-          <p>Account Name: Sri Vinayaka Borewells</p>
-          <p>Account Number: 31691791005</p>
+          <p>Bank: UNION Bank</p>
+          <p>Account Name: NarayanaSwamy V</p>
+          <p>Account Number: 117010100019005</p>
           <p>IFSC: SBIN0014962</p>
           <p><strong>Authorized Signature:</strong></p>
         </div>
