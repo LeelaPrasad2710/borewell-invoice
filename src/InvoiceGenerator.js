@@ -264,12 +264,12 @@ const InvoiceGenerator = () => {
 
       <div className="invoice-summary-container">
         <div className="bank-details">
-          <p><strong>Bank Details:</strong></p>
-          <p>Bank: UNION Bank</p>
-          <p>Account Name: NarayanaSwamy V</p>
-          <p>Account Number: 117010100019005</p>
-          <p>IFSC: UBIN0811700</p>
-          <p><strong>Authorized Signature:</strong></p>
+          <strong>Bank Details:</strong><br />
+          <span>Bank: UNION Bank</span><br />
+          <span>Account Name: NarayanaSwamy V</span><br />
+          <span>Account Number: 117010100019005</span><br />
+          <span>IFSC: UBIN0811700</span><br />
+          <span><strong>Authorized Signature:</strong>
         </div>
 
         <div className="invoice-summary">
