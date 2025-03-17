@@ -277,13 +277,13 @@ const InvoiceGenerator = () => {
           <p>Add CGST 9%: ₹{cgst}</p>
           <p>Add SGST 9%: ₹{sgst}</p>
           <p>Gross Total: ₹{grossTotal}</p>
-          <div className="detail-row">
-            <label>GSTIN:</label>
-            <input type="text" list="gstin-options" placeholder="" />
-            <datalist id="gstin-options">
-              <option value="2025ABSOF12234" />
-            </datalist>
-          </div>
+          // <div className="detail-row">
+          //   <label>GSTIN:</label>
+          //   <input type="text" list="gstin-options" placeholder="" />
+          //   <datalist id="gstin-options">
+          //     <option value="2025ABSOF12234" />
+          //   </datalist>
+          // </div>
           <p><strong>Amount in Words:</strong> {grossTotalWords} Only</p>
         </div>
       </div>
